@@ -20,7 +20,6 @@ You must set the following values in the script, otherwise it will fail:
 - *@from_add*: Email notifications sender
 
 ### Todo
-- Proper error handling for http requests
 
 License
 ---
