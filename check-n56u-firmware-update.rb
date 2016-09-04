@@ -23,8 +23,15 @@ require 'net/smtp'
 def getdlinfo
   name, dl_date = nil
 
-  uri = URI.parse(@url)
-  downloads = JSON.parse(Net::HTTP.get(uri))
+  uri = URI(@url)
+  res = Net::HTTP.get_response(uri)
+  
+  if res.code != '200'
+    puts "Call to Bitbucket API failed: #{res.message}"
+    exit 1
+  end
+  
+  downloads = JSON.parse(res.body)
   
   downloads['values'].each do |x|
     if x['name'] =~ /RT-N56U_.*_base.trx/
